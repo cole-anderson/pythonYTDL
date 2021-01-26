@@ -2,19 +2,24 @@
 import os
 import sys
 import subprocess
+import time
 from tkinter import *
 import tkinter as tk
+from tkinter.ttk import Progressbar
 
 root = tk.Tk()
+root.title('yt-playlist-downloader by cole')
+root.geometry("500x500")
 
-e = Entry(root, width=50, font=('Helvetica', 24))
-e.pack()
+enterF = Entry(root, width=50, font=('Helvetica', 24))
+enterF.pack()
 
 def myClick():
-    play = str(e.get())
+    play = str(enterF.get())
     subprocess.run(["youtube-dl", "--download-archive", "context.txt", "--extract-audio", "--audio-format", "mp3", play])
+    # while subrpocess running do loading bar ? TODO: HERE
     myLabel = Label(root, text="download complete")
-    e.delete(0, 'end')
+    enterF.delete(0, 'end')
     myLabel.pack()
     
 myButton = Button(root, text="Press Here To Download", command=myClick)
